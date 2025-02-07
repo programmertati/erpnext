@@ -26,18 +26,20 @@
   "expected_closing",
   "probability",
   "organization_details_section",
-  "no_of_employees",
-  "annual_revenue",
-  "customer_group",
-  "column_break_23",
   "industry",
   "market_segment",
   "website",
-  "column_break_31",
+  "column_break_23",
+  "no_of_employees",
+  "annual_revenue",
+  "customer_group",
   "city",
   "state",
+  "district",
   "country",
   "territory",
+  "column_break_scdzy",
+  "contact",
   "section_break_14",
   "currency",
   "column_break_36",
@@ -185,7 +187,8 @@
   {
    "fieldname": "expected_closing",
    "fieldtype": "Date",
-   "label": "Expected Closing Date"
+   "label": "Expected Closing Date",
+   "no_copy": 1
   },
   {
    "fieldname": "section_break_14",
@@ -357,6 +360,7 @@
    "fieldname": "transaction_date",
    "fieldtype": "Date",
    "label": "Opportunity Date",
+   "no_copy": 1,
    "oldfieldname": "transaction_date",
    "oldfieldtype": "Date",
    "reqd": 1,
@@ -388,6 +392,7 @@
    "fieldname": "first_response_time",
    "fieldtype": "Duration",
    "label": "First Response Time",
+   "no_copy": 1,
    "read_only": 1
   },
   {
@@ -528,10 +533,6 @@
    "label": "Phone Ext."
   },
   {
-   "fieldname": "column_break_31",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "primary_contact_section",
    "fieldtype": "Section Break",
    "label": "Primary Contact"
@@ -604,25 +605,43 @@
   },
   {
    "fieldname": "city",
-   "fieldtype": "Data",
-   "label": "City"
+   "fieldtype": "Link",
+   "label": "City",
+   "options": "Territory"
   },
   {
    "fieldname": "state",
-   "fieldtype": "Data",
-   "label": "State"
+   "fieldtype": "Link",
+   "label": "State",
+   "options": "Territory"
   },
   {
    "fieldname": "country",
    "fieldtype": "Link",
    "label": "Country",
    "options": "Country"
+  },
+  {
+   "fieldname": "district",
+   "fieldtype": "Link",
+   "label": "district",
+   "options": "Territory"
+  },
+  {
+   "fieldname": "column_break_scdzy",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "contact",
+   "fieldtype": "Table",
+   "label": "Contact",
+   "options": "Client Prospect PIC"
   }
  ],
  "icon": "fa fa-info-sign",
  "idx": 195,
  "links": [],
- "modified": "2022-10-13 12:42:21.545636",
+ "modified": "2025-02-07 10:37:38.961085",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Opportunity",

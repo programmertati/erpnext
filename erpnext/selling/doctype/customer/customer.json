@@ -23,6 +23,18 @@
   "opportunity_name",
   "account_manager",
   "image",
+  "organization_section",
+  "organization_name",
+  "industry",
+  "market_segment",
+  "bussiness_category",
+  "column_break_o1tf1",
+  "country",
+  "state",
+  "city",
+  "district",
+  "column_break_exabs",
+  "address",
   "defaults_tab",
   "default_price_list",
   "default_bank_account",
@@ -34,8 +46,6 @@
   "column_break_70",
   "companies",
   "more_info",
-  "market_segment",
-  "industry",
   "customer_pos_id",
   "website",
   "language",
@@ -43,6 +53,8 @@
   "customer_details",
   "dashboard_tab",
   "contact_and_address_tab",
+  "section_break_e3szo",
+  "contact_detail",
   "address_contacts",
   "address_html",
   "column_break1",
@@ -131,7 +143,7 @@
    "label": "Customer Type",
    "oldfieldname": "customer_type",
    "oldfieldtype": "Select",
-   "options": "Company\nIndividual\nProprietorship\nPartnership",
+   "options": "Company\nIndividual\nPartnership",
    "reqd": 1
   },
   {
@@ -184,14 +196,12 @@
   {
    "fieldname": "territory",
    "fieldtype": "Link",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
+   "hidden": 1,
    "label": "Territory",
    "oldfieldname": "territory",
    "oldfieldtype": "Link",
    "options": "Territory",
-   "print_hide": 1,
-   "reqd": 1
+   "print_hide": 1
   },
   {
    "fieldname": "tax_id",
@@ -293,6 +303,7 @@
    "description": "Select, to make the customer searchable with these fields",
    "fieldname": "primary_address_and_contact_detail",
    "fieldtype": "Section Break",
+   "hidden": 1,
    "label": "Primary Address and Contact"
   },
   {
@@ -376,12 +387,14 @@
    "fieldtype": "Column Break"
   },
   {
+   "fetch_from": "lead_name.market_segment",
    "fieldname": "market_segment",
    "fieldtype": "Link",
    "label": "Market Segment",
    "options": "Market Segment"
   },
   {
+   "fetch_from": "lead_name.industry",
    "fieldname": "industry",
    "fieldtype": "Link",
    "label": "Industry",
@@ -481,7 +494,7 @@
   {
    "fieldname": "contact_and_address_tab",
    "fieldtype": "Tab Break",
-   "label": "Contact & Address"
+   "label": "Address & Contact"
   },
   {
    "fieldname": "defaults_tab",
@@ -554,6 +567,76 @@
   {
    "fieldname": "column_break_54",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "organization_section",
+   "fieldtype": "Section Break",
+   "label": "Organization"
+  },
+  {
+   "fetch_from": "lead_name.company_name",
+   "fieldname": "organization_name",
+   "fieldtype": "Data",
+   "label": "Organization Name"
+  },
+  {
+   "fetch_from": "lead_name.bussiness_category",
+   "fieldname": "bussiness_category",
+   "fieldtype": "Link",
+   "label": "Bussiness Category",
+   "options": "Bussiness Category"
+  },
+  {
+   "fieldname": "column_break_o1tf1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "lead_name.country",
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "Country",
+   "options": "Territory"
+  },
+  {
+   "fetch_from": "lead_name.state",
+   "fieldname": "state",
+   "fieldtype": "Link",
+   "label": "State",
+   "options": "Territory"
+  },
+  {
+   "fetch_from": "lead_name.city",
+   "fieldname": "city",
+   "fieldtype": "Link",
+   "label": "City",
+   "options": "Territory"
+  },
+  {
+   "fetch_from": "lead_name.district",
+   "fieldname": "district",
+   "fieldtype": "Link",
+   "label": "District",
+   "options": "Territory"
+  },
+  {
+   "fieldname": "column_break_exabs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "lead_name.address",
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address"
+  },
+  {
+   "fieldname": "section_break_e3szo",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "contact_detail",
+   "fieldtype": "Table",
+   "label": "Contact Detail",
+   "options": "Client Prospect PIC"
   }
  ],
  "icon": "fa fa-user",
@@ -567,7 +650,7 @@
    "link_fieldname": "party"
   }
  ],
- "modified": "2023-12-28 13:15:36.298369",
+ "modified": "2025-02-07 11:05:20.040714",
  "modified_by": "Administrator",
  "module": "Selling",
  "name": "Customer",

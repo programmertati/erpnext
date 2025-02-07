@@ -16,6 +16,8 @@
   "last_name",
   "column_break_1",
   "lead_name",
+  "market_segment",
+  "bussiness_category",
   "job_title",
   "gender",
   "source",
@@ -26,31 +28,30 @@
   "type",
   "request_type",
   "contact_info_tab",
+  "lead_contact",
   "email_id",
   "website",
-  "column_break_20",
   "mobile_no",
   "whatsapp_no",
-  "column_break_16",
   "phone",
   "phone_ext",
+  "fax",
   "organization_section",
   "company_name",
+  "industry",
   "no_of_employees",
   "column_break_28",
+  "country",
+  "state",
+  "city",
+  "district",
   "annual_revenue",
-  "industry",
-  "market_segment",
   "column_break_31",
-  "territory",
-  "fax",
+  "address",
   "address_section",
+  "territory",
   "address_html",
   "column_break_38",
-  "city",
-  "state",
-  "country",
-  "column_break2",
   "contact_html",
   "qualification_tab",
   "qualification_status",
@@ -112,11 +113,11 @@
   {
    "fieldname": "email_id",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Email",
    "oldfieldname": "email_id",
    "oldfieldtype": "Data",
-   "options": "Email",
-   "search_index": 1
+   "options": "Email"
   },
   {
    "fieldname": "col_break123",
@@ -181,8 +182,6 @@
    "fieldname": "campaign_name",
    "fieldtype": "Link",
    "label": "Campaign Name",
-   "oldfieldname": "campaign_name",
-   "oldfieldtype": "Link",
    "options": "Campaign"
   },
   {
@@ -204,10 +203,6 @@
    "read_only": 1
   },
   {
-   "fieldname": "column_break2",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "contact_html",
    "fieldtype": "HTML",
    "label": "Contact HTML",
@@ -216,6 +211,7 @@
   {
    "fieldname": "phone",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Phone",
    "oldfieldname": "contact_no",
    "oldfieldtype": "Data",
@@ -224,6 +220,7 @@
   {
    "fieldname": "mobile_no",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Mobile No",
    "oldfieldname": "mobile_no",
    "oldfieldtype": "Data",
@@ -232,6 +229,7 @@
   {
    "fieldname": "fax",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Fax",
    "oldfieldname": "fax",
    "oldfieldtype": "Data"
@@ -280,6 +278,7 @@
   {
    "fieldname": "website",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Website",
    "oldfieldname": "website",
    "oldfieldtype": "Data"
@@ -287,6 +286,7 @@
   {
    "fieldname": "territory",
    "fieldtype": "Link",
+   "hidden": 1,
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Territory",
@@ -349,6 +349,7 @@
   {
    "fieldname": "whatsapp_no",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "WhatsApp",
    "options": "Phone"
   },
@@ -357,12 +358,9 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_16",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "phone_ext",
    "fieldtype": "Data",
+   "hidden": 1,
    "label": "Phone Ext."
   },
   {
@@ -378,7 +376,6 @@
    "label": "Comments"
   },
   {
-   "collapsible": 1,
    "fieldname": "other_info_tab",
    "fieldtype": "Section Break",
    "label": "Additional Information"
@@ -415,19 +412,15 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_20",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "job_title",
    "fieldtype": "Data",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
+   "hidden": 1,
    "label": "Job Title"
   },
   {
    "fieldname": "annual_revenue",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Annual Revenue"
   },
   {
@@ -489,32 +482,63 @@
   },
   {
    "fieldname": "city",
-   "fieldtype": "Data",
-   "label": "City"
+   "fieldtype": "Link",
+   "label": "City",
+   "options": "Territory"
   },
   {
    "fieldname": "state",
-   "fieldtype": "Data",
-   "label": "State"
+   "fieldtype": "Link",
+   "label": "State",
+   "options": "Territory"
   },
   {
    "fieldname": "country",
    "fieldtype": "Link",
    "label": "Country",
-   "options": "Country"
+   "options": "Territory"
   },
   {
    "fieldname": "dashboard_tab",
    "fieldtype": "Tab Break",
    "label": "Connections",
    "show_dashboard": 1
+  },
+  {
+   "fieldname": "bussiness_category",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Bussiness Category",
+   "options": "Bussiness Category",
+   "search_index": 1
+  },
+  {
+   "fieldname": "lead_contact",
+   "fieldtype": "Table",
+   "label": "Lead Contact",
+   "options": "Client Prospect PIC"
+  },
+  {
+   "fieldname": "district",
+   "fieldtype": "Link",
+   "label": "District",
+   "oldfieldname": "campaign_name",
+   "oldfieldtype": "Link",
+   "options": "Territory"
+  },
+  {
+   "collapsible": 1,
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address"
   }
  ],
  "icon": "fa fa-user",
  "idx": 5,
  "image_field": "image",
  "links": [],
- "modified": "2023-12-01 18:46:49.468526",
+ "modified": "2025-02-07 10:23:39.673360",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Lead",
