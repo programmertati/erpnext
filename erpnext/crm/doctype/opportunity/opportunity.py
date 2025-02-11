@@ -74,15 +74,17 @@ class Opportunity(TransactionBase, CRMNote):
 
 	def calculate_totals(self):
 		total = base_total = 0
-		for item in self.get("items"):
-			item.amount = flt(item.rate) * flt(item.qty)
-			item.base_rate = flt(self.conversion_rate) * flt(item.rate)
-			item.base_amount = flt(self.conversion_rate) * flt(item.amount)
-			total += item.amount
-			base_total += item.base_amount
+		# for item in self.get("items"):
+		# 	item.amount = flt(item.rate) * flt(item.qty)
+		# 	item.base_rate = flt(self.conversion_rate) * flt(item.rate)
+		# 	item.base_amount = flt(self.conversion_rate) * flt(item.amount)
+		# 	total += item.amount
+		# 	base_total += item.base_amount
+		total = sum(d.est_cost for d in self.items if d.est_cost)
+
 
 		self.total = flt(total)
-		self.base_total = flt(base_total)
+		# self.base_total = flt(base_total)
 
 	def update_prospect(self):
 		prospect_name = None
@@ -255,16 +257,16 @@ class Opportunity(TransactionBase, CRMNote):
 			return
 
 		# set missing values
-		item_fields = ("item_name", "description", "item_group", "brand")
+		# item_fields = ("item_name", "description", "item_group", "brand")
 
 		for d in self.items:
 			if not d.item_code:
 				continue
 
-			item = frappe.db.get_value("Item", d.item_code, item_fields, as_dict=True)
-			for key in item_fields:
-				if not d.get(key):
-					d.set(key, item.get(key))
+			# item = frappe.db.get_value("Item", d.item_code, item_fields, as_dict=True)
+			# for key in item_fields:
+			# 	if not d.get(key):
+			# 		d.set(key, item.get(key))
 
 
 @frappe.whitelist()

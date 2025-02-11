@@ -218,33 +218,49 @@ frappe.ui.form.on("Opportunity", {
 		frm.refresh_fields();
 	},
 
-	calculate_total: function(frm) {
-		let total = 0, base_total = 0;
-		frm.doc.items.forEach(item => {
-			total += item.amount;
-			base_total += item.base_amount;
-		})
+	// calculate_total: function(frm) {
+	// 	let total = 0, base_total = 0;
+	// 	frm.doc.items.forEach(item => {
+	// 		total += item.amount;
+	// 		base_total += item.base_amount;
+	// 	})
 
-		frm.set_value({
-			'total': flt(total),
-			'base_total': flt(base_total)
-		});
-	},
+	// 	frm.set_value({
+	// 		'total': flt(total),
+	// 		'base_total': flt(base_total)
+	// 	});
+	// },
+	calculate_total: function(frm) {
+        let total = 0;
+        frm.doc.items.forEach(item => {
+            total += item.est_cost || 0;
+        });
+        frm.set_value("total", total);
+    },
 });
 frappe.ui.form.on("Opportunity Item", {
-	calculate: function(frm, cdt, cdn) {
-		let row = frappe.get_doc(cdt, cdn);
-		frappe.model.set_value(cdt, cdn, "amount", flt(row.qty) * flt(row.rate));
-		frappe.model.set_value(cdt, cdn, "base_rate", flt(frm.doc.conversion_rate) * flt(row.rate));
-		frappe.model.set_value(cdt, cdn, "base_amount", flt(frm.doc.conversion_rate) * flt(row.amount));
-		frm.trigger("calculate_total");
-	},
-	qty: function(frm, cdt, cdn) {
-		frm.trigger("calculate", cdt, cdn);
-	},
-	rate: function(frm, cdt, cdn) {
-		frm.trigger("calculate", cdt, cdn);
-	}
+	// calculate: function(frm, cdt, cdn) {
+	// 	let row = frappe.get_doc(cdt, cdn);
+	// 	frappe.model.set_value(cdt, cdn, "amount", flt(row.qty) * flt(row.rate));
+	// 	frappe.model.set_value(cdt, cdn, "base_rate", flt(frm.doc.conversion_rate) * flt(row.rate));
+	// 	frappe.model.set_value(cdt, cdn, "base_amount", flt(frm.doc.conversion_rate) * flt(row.amount));
+	// 	frm.trigger("calculate_total");
+	// },
+	// qty: function(frm, cdt, cdn) {
+	// 	frm.trigger("calculate", cdt, cdn);
+	// },
+	// rate: function(frm, cdt, cdn) {
+	// 	frm.trigger("calculate", cdt, cdn);
+	// }
+	est_cost: function(frm, cdt, cdn) {
+        frm.trigger("calculate_total");
+    },
+    items_add: function(frm) {
+        frm.trigger("calculate_total");
+    },
+    items_remove: function(frm) {
+        frm.trigger("calculate_total");
+    }
 })
 
 // TODO commonify this code
