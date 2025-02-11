@@ -39,7 +39,7 @@
   "country",
   "territory",
   "column_break_scdzy",
-  "contact",
+  "lead_contact",
   "section_break_14",
   "currency",
   "column_break_36",
@@ -632,7 +632,7 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "contact",
+   "fieldname": "lead_contact",
    "fieldtype": "Table",
    "label": "Contact",
    "options": "Client Prospect PIC"
@@ -641,7 +641,7 @@
  "icon": "fa fa-info-sign",
  "idx": 195,
  "links": [],
- "modified": "2025-02-07 10:37:38.961085",
+ "modified": "2025-02-07 15:11:46.821555",
  "modified_by": "Administrator",
  "module": "CRM",
  "name": "Opportunity",

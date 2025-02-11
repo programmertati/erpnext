@@ -54,7 +54,7 @@
   "dashboard_tab",
   "contact_and_address_tab",
   "section_break_e3szo",
-  "contact_detail",
+  "lead_contact",
   "address_contacts",
   "address_html",
   "column_break1",
@@ -633,7 +633,7 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "contact_detail",
+   "fieldname": "lead_contact",
    "fieldtype": "Table",
    "label": "Contact Detail",
    "options": "Client Prospect PIC"
@@ -650,7 +650,7 @@
    "link_fieldname": "party"
   }
  ],
- "modified": "2025-02-07 11:05:20.040714",
+ "modified": "2025-02-07 15:15:28.633802",
  "modified_by": "Administrator",
  "module": "Selling",
  "name": "Customer",
