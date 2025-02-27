@@ -407,3 +407,39 @@ def validate_project_dates(project_end_date, task, task_start, task_end, actual_
 		frappe.throw(
 			_("Task's {0} End Date cannot be after Project's End Date.").format(actual_or_expected_date)
 		)
+
+@frappe.whitelist()
+def update_parent_progress(task):
+    frappe.logger().info(f"Updating progress for Task: {task}")
+    update_progress_recursive(task)
+
+def update_progress_recursive(task):
+    task_doc = frappe.get_doc("Task", task)
+
+    if not task_doc.parent_task:
+        return  # Stop rekursi jika tidak ada parent
+
+    # Ambil semua child dari parent_task yang sama
+    child_tasks = frappe.get_all(
+        "Task",
+        filters={"parent_task": task_doc.parent_task},
+        fields=["progress"]
+    )
+
+    # Debug: Cek child tasks yang ditemukan
+    frappe.logger().info(f"Updating Parent {task_doc.parent_task}, Child Count: {len(child_tasks)}")
+
+    if not child_tasks:
+        return
+
+    # Hitung rata-rata progress dari child
+    total_progress = sum(t["progress"] for t in child_tasks if t["progress"] is not None)
+    num_tasks = len(child_tasks)
+    new_progress = total_progress / num_tasks if num_tasks > 0 else 0
+
+    # Update progress Parent Task
+    frappe.db.set_value("Task", task_doc.parent_task, "progress", new_progress)
+    frappe.db.commit()
+
+    # Rekursi ke atas untuk update parent di level lebih tinggi
+    update_progress_recursive(task_doc.parent_task)
