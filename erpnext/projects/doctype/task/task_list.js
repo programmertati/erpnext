@@ -46,14 +46,42 @@ frappe.listview_settings["Task"] = {
 			<span class="text-white">${moment(ganttobj._start).format("MMM D")} - ${moment(ganttobj._end).format("MMM D")} (${duration} days)</span>
 		</p>`;
 
+		// if (task.project) {
+		// 	html += `<p class="mb-1">${__("Project")}:
+		// 		<a class="text-white inline-block"
+		// 			href="/app/project/${task.project}"">
+		// 			${task.project}
+		// 		</a>
+		// 	</p>`;
+		// }
+		// Default project name is ID, will be replaced when data is fetched
+		let projectHtml = "";
 		if (task.project) {
-			html += `<p class="mb-1">${__("Project")}:
+			projectHtml = `<p class="mb-1">${__("Project")}:
 				<a class="text-white inline-block"
-					href="/app/project/${task.project}"">
-					${task.project}
+					href="/app/project/${task.project}">
+					${task.project} (Loading...)
 				</a>
 			</p>`;
+
+			// Fetch project name and update HTML dynamically
+			frappe.db.get_value("Project", task.project, "project_name").then((r) => {
+				if (r && r.message && r.message.project_name) {
+					const project_name = r.message.project_name;
+					document.querySelector(`[data-task="${task.project}"]`).innerHTML = `
+						<p class="mb-1">${__("Project")}:
+							<a class="text-white inline-block"
+								href="/app/project/${task.project}">
+								${project_name}
+							</a>
+						</p>
+					`;
+				}
+			});
 		}
+
+		html += `<div data-task="${task.project}">${projectHtml}</div>`; // Placeholder to update later
+
 		html += `<p class="mb-1">
 			${__("Progress")}:
 			<span class="text-white">${ganttobj.progress}%</span>
