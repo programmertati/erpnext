@@ -34,7 +34,8 @@ frappe.listview_settings["Task"] = {
 		return [__(doc.status), colors[doc.status], "status,=," + doc.status];
 	},
 	gantt_custom_popup_html: function (ganttobj, task) {
-		var duration = moment(ganttobj._end).diff(moment(ganttobj._start), 'days') + 1;
+		var duration = moment(ganttobj.end).diff(moment(ganttobj.start), 'days') + 1;
+		
 		let html = `
 			<a class="text-white mb-2 inline-block cursor-pointer"
 				href="/app/task/${ganttobj.id}"">
@@ -43,7 +44,7 @@ frappe.listview_settings["Task"] = {
 		`;
 		html += `<p class="mb-1">
 			${__("Date")}:
-			<span class="text-white">${moment(ganttobj._start).format("MMM D")} - ${moment(ganttobj._end).format("MMM D")} (${duration} days)</span>
+			<span class="text-white">${moment(ganttobj.start).format("MMM D")} - ${moment(ganttobj.end).format("MMM D")} (${duration} days)</span>
 		</p>`;
 
 		// if (task.project) {
