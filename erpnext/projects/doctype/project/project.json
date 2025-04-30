@@ -452,7 +452,7 @@
  "index_web_pages_for_search": 1,
  "links": [],
  "max_attachments": 4,
- "modified": "2024-04-24 10:56:16.001032",
+ "modified": "2025-04-29 08:35:28.985573",
  "modified_by": "Administrator",
  "module": "Projects",
  "name": "Project",
@@ -506,5 +506,6 @@
  "states": [],
  "timeline_field": "customer",
  "title_field": "project_name",
+ "track_changes": 1,
  "track_seen": 1
 }

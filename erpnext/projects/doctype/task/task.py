@@ -68,6 +68,7 @@ class Task(NestedSet):
 	def validate_parent_expected_end_date(self):
 		if self.parent_task:
 			parent_exp_end_date = frappe.db.get_value("Task", self.parent_task, "exp_end_date")
+
 			if parent_exp_end_date and getdate(self.get("exp_end_date")) > getdate(parent_exp_end_date):
 				frappe.throw(
 					_(
@@ -142,13 +143,52 @@ class Task(NestedSet):
 	def update_nsm_model(self):
 		frappe.utils.nestedset.update_nsm(self)
 
+		
+	def before_save(self):
+		# Store previous percent_complete before saving
+		if self.get_db_value("progress") is not None:
+			self._previous_percent_complete = self.get_db_value("progress")
+		else:
+			self._previous_percent_complete = 0
+
 	def on_update(self):
 		self.update_nsm_model()
 		self.check_recursion()
 		self.reschedule_dependent_tasks()
-		self.update_project()
 		self.unassign_todo()
 		self.populate_depends_on()
+		#     Cek kalau statusnya baru saja jadi Completed
+		if self.status == "Completed" and not frappe.flags.in_task_completion:
+			# Tambahkan comment ke Project
+			if self.project:
+				# Baca progress sebelum update
+				previous_progress = getattr(self, "_previous_percent_complete", 0)
+
+
+				# Set flag untuk hindari infinite loop
+				frappe.flags.in_task_completion = True
+
+				# FETCH Project's OLD percent_complete directly from database
+				previous_project_progress = frappe.db.get_value("Project", self.project, "percent_complete") or 0
+
+				# update project
+				self.update_project()
+				project = frappe.get_doc("Project", self.project)				
+				project.reload()
+				new_project_progress = project.percent_complete or 0
+
+				# Tambahkan comment ke Project
+				frappe.get_doc({
+					"doctype": "Comment",
+					"comment_type": "Info",
+					"reference_doctype": "Project",
+					"reference_name": self.project,
+					"content": f" has completed the task 'Task <b>{self.subject}</b>' . Progress from  {previous_progress}% to  100%. <br>"
+					f"Project progress: from {previous_project_progress}% to {new_project_progress}%.",
+				}).insert(ignore_permissions=True)
+				
+				frappe.flags.in_task_completion = False
+
 
 	def unassign_todo(self):
 		if self.status == "Completed":

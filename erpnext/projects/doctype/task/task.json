@@ -243,8 +243,7 @@
    "fieldtype": "Date",
    "label": "Actual Start Date (via Time Sheet)",
    "oldfieldname": "act_start_date",
-   "oldfieldtype": "Date",
-   "read_only": 1
+   "oldfieldtype": "Date"
   },
   {
    "fieldname": "actual_time",
@@ -261,8 +260,7 @@
    "fieldtype": "Date",
    "label": "Actual End Date (via Time Sheet)",
    "oldfieldname": "act_end_date",
-   "oldfieldtype": "Date",
-   "read_only": 1
+   "oldfieldtype": "Date"
   },
   {
    "collapsible": 1,
@@ -396,7 +394,7 @@
  "is_tree": 1,
  "links": [],
  "max_attachments": 5,
- "modified": "2023-09-28 13:52:05.861175",
+ "modified": "2025-04-29 08:42:38.249192",
  "modified_by": "Administrator",
  "module": "Projects",
  "name": "Task",
@@ -424,5 +422,6 @@
  "states": [],
  "timeline_field": "project",
  "title_field": "subject",
+ "track_changes": 1,
  "track_seen": 1
 }

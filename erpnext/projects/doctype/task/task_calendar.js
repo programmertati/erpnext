@@ -5,6 +5,8 @@ frappe.views.calendar["Task"] = {
 	field_map: {
 		start: "exp_start_date",
 		end: "exp_end_date",
+		act_start: "act_start_date",
+		act_end: "act_end_date",
 		id: "name",
 		title: "subject",
 		allDay: "allDay",
